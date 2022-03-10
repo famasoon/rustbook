@@ -1,5 +1,3 @@
-#![allow(unused_variables)]
-
 #[derive(Debug)]
 struct File{
     name: String,
@@ -20,21 +18,21 @@ impl File {
         f
     }
 
-    fn read(self: &File, save_to: &mut Vec<u8>) -> usize {
+    fn read(self: &File, save_to: &mut Vec<u8>) -> Result<usize, String> {
         let mut tmp = self.data.clone();
         let read_length = tmp.len();
         save_to.reserve(read_length);
         save_to.append(&mut tmp);
-        read_length
+        Ok(read_length)
     }
 }
 
-fn open(f: &mut File) -> bool {
-    true
+fn open(f: File) -> Result<File, String> {
+    Ok(f)
 }
 
-fn close(f: &mut File) -> bool {
-    true
+fn close(f: File) -> Result<File, String> {
+    Ok(f)
 }
 
 fn main() {
@@ -43,9 +41,9 @@ fn main() {
 
     let mut buffer: Vec<u8> = vec![];
 
-    open(&mut f1);
-    let f1_length = f1.read(&mut buffer);
-    close(&mut f1);
+    f1 = open(f1).unwrap();
+    let f1_length = f1.read(&mut buffer).unwrap();
+    f1 = close(f1).unwrap();
 
     let text = String::from_utf8_lossy(&buffer);
 
