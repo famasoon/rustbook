@@ -10,7 +10,7 @@ struct CubeSat {
     id: u64,
 }
 
-fn check_status(sat_id: u64) -> StatusMessage {
+fn check_status(sat_id: CubeSat) -> StatusMessage {
     StatusMessage::Ok
 }
 
