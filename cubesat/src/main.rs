@@ -1,4 +1,4 @@
-#![allow(unused_variables)]
+#![allow(unused_variables, dead_code)]
 #[derive(Debug)]
 struct CubeSat {
     id: u64,
