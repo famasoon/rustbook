@@ -11,8 +11,8 @@ Usage:
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     let fname = args.get(1).expect(&USAGE);
-    let action = args.get(2).expect(&USAGE);
-    let key = args.get(3).expect(&USAGE);
+    let action = args.get(2).expect(&USAGE).as_ref();
+    let key = args.get(3).expect(&USAGE).as_ref();
     let maybe_value = args.get(4);
 
     let path = std::path::Path::new(&fname);
@@ -37,6 +37,6 @@ fn main() {
             store.insert(key, value).unwrap();
         }
 
-        _ => eprintln!("{}", &USAGE)
+        _ => eprintln!("{}", &USAGE),
     }
 }
